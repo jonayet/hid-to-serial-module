@@ -1,6 +1,6 @@
 
 //--- Settings ---
-#define UART_BUFFER_SIZE 945
+#define UART_BUFFER_SIZE 900
 
 //--- Global Variables ---
 extern char UART_String[UART_BUFFER_SIZE];

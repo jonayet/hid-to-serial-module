@@ -11,6 +11,8 @@
 // define IO
 #define _OP_RS485_DEnRE LATC2_bit
 #define _DR_RS485_DEnRE TRISC2_bit
+#define _OP_DEBUG_SIG LATA0_bit
+#define _DR_DEBUG_SIG TRISA0_bit
 
 extern unsigned int Timer_1ms;
 

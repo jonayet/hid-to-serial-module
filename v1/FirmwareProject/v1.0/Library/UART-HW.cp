@@ -1,11 +1,11 @@
-#line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Library/UART-HW.c"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/uart-hw.h"
+#line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/UART-HW.c"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/uart-hw.h"
 
 
 
 
 
-extern char UART_String[ 945 ];
+extern char UART_String[ 900 ];
 extern unsigned char UART_NewReceived;
 extern unsigned char UART_Timer;
 extern unsigned int UART_Counter;
@@ -20,8 +20,8 @@ void UART_ReadWait(unsigned int TimeOut);
 void UART_StartReading();
 void UART_StopReading();
 void UART_InterruptService();
-#line 8 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Library/UART-HW.c"
-char UART_String[ 945 ];
+#line 8 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/UART-HW.c"
+char UART_String[ 900 ];
 unsigned char UART_NewReceived;
 unsigned char UART_Tmp;
 unsigned char UART_Timer;
@@ -84,7 +84,7 @@ void UART_ReadWait(unsigned int TimeOut)
 
  RCIE_bit = 0;
 }
-#line 75 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Library/UART-HW.c"
+#line 75 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/UART-HW.c"
 void UART_StartReading()
 {
 
@@ -96,7 +96,7 @@ void UART_StartReading()
  UART_String[0] = '\0';
  UART_Counter = 0;
 }
-#line 90 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Library/UART-HW.c"
+#line 90 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/UART-HW.c"
 void UART_StopReading()
 {
 

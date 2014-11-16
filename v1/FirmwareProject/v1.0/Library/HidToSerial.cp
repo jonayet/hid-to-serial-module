@@ -1,6 +1,6 @@
-#line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Library/HidToSerial.c"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/hidtoserial.h"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/packetstructure.h"
+#line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/HidToSerial.c"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/hidtoserial.h"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/packetstructure.h"
 
 
 
@@ -150,7 +150,7 @@ typedef enum
  ASYNC_IN_DATA_FROM_DEVICE,
  UNKNOWN_FROM_DEVICE
 } DeviceTransmisionType;
-#line 8 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/hidtoserial.h"
+#line 8 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/hidtoserial.h"
 extern HostPacketData hidReadBuff;
 extern DevicePacketData hidWriteBuff;
 
@@ -167,14 +167,14 @@ void SendSyncInPacketsFromUart();
 void WriteAsyncOutDataToUart();
 void SendAsyncInSegmentFromUart(unsigned char FullLength);
 void SendUnknownResponse();
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/packetstructure.h"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/uart-hw.h"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/packetstructure.h"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/uart-hw.h"
 
 
 
 
 
-extern char UART_String[ 945 ];
+extern char UART_String[ 900 ];
 extern unsigned char UART_NewReceived;
 extern unsigned char UART_Timer;
 extern unsigned int UART_Counter;
@@ -189,14 +189,14 @@ void UART_ReadWait(unsigned int TimeOut);
 void UART_StartReading();
 void UART_StopReading();
 void UART_InterruptService();
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/lib-string.h"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/compilerdefinations.h"
-#line 5 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/lib-string.h"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/lib-string.h"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/compilerdefinations.h"
+#line 5 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/lib-string.h"
 void GetString(char* Destination, const char* ConstString);
  unsigned int  GetStringLength(char* String);
  unsigned int  GetConstStringLength(const char* String);
 unsigned char StrToByte(char* Source, char Length);
-#line 6 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Library/HidToSerial.c"
+#line 6 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/HidToSerial.c"
 void WriteSyncOutSegmentToUart();
 unsigned char WaitForUartData(unsigned int Length, unsigned int TimeOut);
 unsigned char WaitForHidData();

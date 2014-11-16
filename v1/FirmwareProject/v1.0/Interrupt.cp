@@ -1,20 +1,20 @@
-#line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Interrupt.c"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/hardwareprofile.h"
-#line 15 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/hardwareprofile.h"
+#line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Interrupt.c"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
+#line 17 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
 extern unsigned int Timer_1ms;
 
 
 void ConfigureIO();
 void ConfigureModules();
 void ConfigureInterrupts();
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/compilerdefinations.h"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/uart-hw.h"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/compilerdefinations.h"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/uart-hw.h"
 
 
 
 
 
-extern char UART_String[ 945 ];
+extern char UART_String[ 900 ];
 extern unsigned char UART_NewReceived;
 extern unsigned char UART_Timer;
 extern unsigned int UART_Counter;
@@ -29,7 +29,7 @@ void UART_ReadWait(unsigned int TimeOut);
 void UART_StartReading();
 void UART_StopReading();
 void UART_InterruptService();
-#line 7 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Interrupt.c"
+#line 7 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Interrupt.c"
 void interrupt()
 {
 

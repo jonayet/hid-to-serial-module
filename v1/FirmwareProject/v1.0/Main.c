@@ -60,6 +60,14 @@ void main()
     // Enable HID communication
     HID_Enable(&hidReadBuff.Raw.bytes, &hidWriteBuff.Raw.bytes);
     
+    while(1)
+    {
+        _OP_DEBUG_SIG = 1;
+        Delay_us(100);
+        _OP_DEBUG_SIG = 0;
+        Delay_us(100);
+    }
+    
     // forever loop to continue
     while(1)
     {

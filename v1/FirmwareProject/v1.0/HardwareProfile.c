@@ -12,6 +12,10 @@ void ConfigureIO()
     // configure RS485 as Receiver mode
     _OP_RS485_DEnRE = 0;
     _DR_RS485_DEnRE = 0;
+    
+    // init debug pin
+    _OP_DEBUG_SIG = 0;
+    _DR_DEBUG_SIG = 0;
 }
 
 /*** Built-in Hardware Module Configuration ***/

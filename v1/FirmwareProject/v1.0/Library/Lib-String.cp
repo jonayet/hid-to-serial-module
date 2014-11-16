@@ -1,12 +1,12 @@
-#line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Library/Lib-String.c"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/lib-string.h"
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/compilerdefinations.h"
-#line 5 "e:/workplace/projects/embedded/hidtoserialmodule/v1/firmwareproject/v1.0/library/lib-string.h"
+#line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/Lib-String.c"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/lib-string.h"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/compilerdefinations.h"
+#line 5 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/lib-string.h"
 void GetString(char* Destination, const char* ConstString);
  unsigned int  GetStringLength(char* String);
  unsigned int  GetConstStringLength(const char* String);
 unsigned char StrToByte(char* Source, char Length);
-#line 3 "E:/Workplace/Projects/Embedded/HidToSerialModule/v1/FirmwareProject/v1.0/Library/Lib-String.c"
+#line 3 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/Lib-String.c"
 void GetString(char* Destination, const char* ConstString)
 {
  while(1)
