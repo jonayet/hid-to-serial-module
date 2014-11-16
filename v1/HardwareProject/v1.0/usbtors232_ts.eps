@@ -1,0 +1,515 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%Title: E:\Workplace\Projects\Embedded\HidToSerialModule\v1\HardwareProject\v1.0\USBToRS232.pdsprj
+%%Creator: LX_PSDVC
+%%CreationDate: Sun Nov 16 02:42:37 2014
+%%BoundingBox: (atend)
+%%EndComments
+
+/docstate save def
+% Global scaling/translation
+0.072 0.072 scale
+1 setlinecap
+
+% Purpose: draw simple line
+% Usage:   x1 y1 x2 y2 t line
+/line
+ { setlinewidth
+   4 2 roll
+   moveto
+   lineto
+   stroke
+ } bind def
+
+% Purpose: draw elliptical quadrant arc
+% Usage:   cx cy xs ys xe ye a b q t
+%    where cx,cy are centre of ellipse
+%          a,b are ellipse diameter
+%          xs,ys, xe,ye are start, end coords
+%          q is quadrant number.
+%          t is line width
+/quadrant
+ { gsave
+   setlinewidth
+   /q exch def
+   /b exch def
+   /a exch def
+   /ye exch currentlinewidth add def
+   /xe exch currentlinewidth sub def
+   /ys exch currentlinewidth sub def
+   /xs exch currentlinewidth add def
+   /cy exch def
+   /cx exch def
+   /ysf b a div def
+   cx cy translate
+   q 1 eq { /xs xs neg def /xe xe neg def } if
+   q 2 eq { /xs xs neg def
+            /ys ys neg def
+            /xe xe neg def
+            /ye ye neg def
+          } if
+   q 3 eq { /ys ys neg def /ye ye neg def } if
+   newpath
+   xe ys moveto
+   xs ys lineto
+   xs ye lineto
+   xe ye lineto
+   closepath
+   clip
+   newpath
+   1 ysf scale
+   q 90 mul rotate
+   a 0 moveto 0 0 a 0 90 arc
+   stroke
+   grestore
+ } bind def
+
+% Purpose: draw bezier arc
+% Usage:   x1 y1 ... x4, y4 t
+%          xn yn are bezier points
+%          t is line width
+/bezier
+ { setlinewidth
+   moveto
+   curveto
+   stroke
+ } bind def
+
+% Purpose: draw filled rectangle
+% Usage:   x1 y1 x2 y2 fillbox
+/fillbox
+ { /y2 exch def
+   /x2 exch def
+   /y1 exch def
+   /x1 exch def
+   x1 y1 moveto
+   x2 y1 lineto
+   x2 y2 lineto
+   x1 y2 lineto
+   closepath
+   fill
+ } bind def
+
+% Purpose: draw elliptical blob in colour c (0 black, 1 white)
+% Usage:   x y a b c ellipse
+/eblob
+ { /c exch def
+   /b exch 2 div def
+   /a exch 2 div def
+   /y exch def
+   /x exch def
+   gsave
+   1 c sub setgray
+   x y translate
+   1 b a div scale
+   0 0 a 0 360 arc
+   fill
+   grestore
+ } bind def
+
+% Purpose: draw rectangular blob in colour c (0 black, 1 white)
+% Usage:   x y a b c rectangle
+/rblob
+ { /c exch def
+   /b exch 2 div def
+   /a exch 2 div def
+   /y exch def
+   /x exch def
+   gsave
+   1 c sub setgray
+   x a sub y b sub moveto
+   x a add y b sub lineto
+   x a add y b add lineto
+   x a sub y b add lineto
+   closepath
+   fill
+   grestore
+ } bind def
+
+% Purpose: draw polygonal blob in colour c (0 black, 1 white)
+% Usage:   xn yn ... x1 y1 np c pblob
+/pblob
+ { /c exch def
+   /np exch def
+   1 c sub setgray
+   moveto
+   np 1 sub
+   {lineto} repeat
+   closepath
+   fill
+ } bind def
+
+% Purpose: draw track segment of specified thickness
+% Usage:   x1 y1 x2 y2 t thickline
+/track
+ { gsave
+   0 setlinecap
+   setlinewidth
+   4 2 roll
+   moveto
+   lineto
+   stroke
+   grestore
+ } bind def
+%%EndProlog
+
+300 dup translate
+0 0 moveto 1408 0 lineto 1408 3921 lineto 0 3921 lineto clip newpath
+4 158 1404 158 8 line
+1404 158 1404 3782 8 line
+1404 3782 4 3782 8 line
+4 3782 4 158 8 line
+39 3387 1299 3387 8 line
+1299 3387 1299 3757 8 line
+1299 3757 39 3757 8 line
+39 3757 39 3387 8 line
+379 3757 379 3857 8 line
+379 3857 954 3857 8 line
+954 3857 954 3757 8 line
+1129 3757 1129 3832 8 line
+1129 3832 1204 3832 8 line
+1204 3832 1204 3757 8 line
+179 3757 179 3832 8 line
+179 3832 104 3832 8 line
+104 3832 104 3757 8 line
+619 3885 619 3879 8 line
+619 3879 625 3873 8 line
+625 3873 650 3873 8 line
+650 3873 656 3879 8 line
+656 3879 656 3909 8 line
+681 3897 694 3909 8 line
+694 3909 694 3873 8 line
+579 2331 579 982 8 line
+579 982 779 982 8 line
+779 982 779 2331 8 line
+579 2331 629 2331 8 line
+779 2331 729 2331 8 line
+629 2303 651 2281 679 2281 629 2331 8 bezier
+729 2303 707 2281 679 2281 729 2331 8 bezier
+595 2311 2 0 0 2 2 2 0 8 quadrant
+595 2311 2 0 0 2 2 2 1 8 quadrant
+595 2311 2 0 0 2 2 2 2 8 quadrant
+595 2311 2 0 0 2 2 2 3 8 quadrant
+629 2383 629 2353 8 line
+629 2353 635 2347 8 line
+635 2347 660 2347 8 line
+660 2347 666 2353 8 line
+666 2353 666 2383 8 line
+691 2371 704 2383 8 line
+704 2383 704 2347 8 line
+1079 2907 1079 2857 8 line
+1029 2779 1050 2757 1079 2757 1029 2807 8 bezier
+1029 2836 1050 2857 1079 2857 1029 2807 8 bezier
+1079 2757 1079 2707 8 line
+279 2907 279 2707 8 line
+1079 2907 279 2907 8 line
+279 2707 1079 2707 8 line
+1095 2757 1125 2757 8 line
+1125 2757 1131 2763 8 line
+1131 2763 1131 2788 8 line
+1131 2788 1125 2794 8 line
+1125 2794 1095 2794 8 line
+1101 2813 1095 2819 8 line
+1095 2819 1095 2838 8 line
+1095 2838 1101 2844 8 line
+1101 2844 1107 2844 8 line
+1107 2844 1113 2838 8 line
+1113 2838 1113 2819 8 line
+1113 2819 1119 2813 8 line
+1119 2813 1131 2813 8 line
+1131 2813 1131 2844 8 line
+279 1358 279 1658 8 line
+279 1658 329 1708 8 line
+329 1708 429 1708 8 line
+429 1708 479 1658 8 line
+479 1658 479 1358 8 line
+479 1358 429 1308 8 line
+429 1308 329 1308 8 line
+329 1308 279 1358 8 line
+227 1458 263 1495 8 line
+263 1458 227 1495 8 line
+239 1520 227 1533 8 line
+227 1533 263 1533 8 line
+1271 2957 1304 2870 1304 2757 1229 2957 8 bezier
+1271 2557 1304 2645 1304 2757 1229 2557 8 bezier
+1187 2557 1154 2645 1154 2757 1229 2557 8 bezier
+1187 2957 1154 2870 1154 2757 1229 2957 8 bezier
+1350 2744 1356 2738 8 line
+1356 2738 1356 2719 8 line
+1356 2719 1344 2707 8 line
+1344 2707 1332 2707 8 line
+1332 2707 1320 2719 8 line
+1320 2719 1320 2738 8 line
+1320 2738 1326 2744 8 line
+1338 2769 1332 2763 8 line
+1332 2763 1326 2763 8 line
+1326 2763 1320 2769 8 line
+1320 2769 1320 2788 8 line
+1320 2788 1326 2794 8 line
+1326 2794 1332 2794 8 line
+1332 2794 1338 2788 8 line
+1338 2788 1338 2769 8 line
+1338 2769 1344 2763 8 line
+1344 2763 1350 2763 8 line
+1350 2763 1356 2769 8 line
+1356 2769 1356 2788 8 line
+1356 2788 1350 2794 8 line
+1350 2794 1344 2794 8 line
+1344 2794 1338 2788 8 line
+1021 1758 1054 1671 1054 1558 979 1758 8 bezier
+1021 1358 1054 1446 1054 1558 979 1358 8 bezier
+937 1358 904 1446 904 1558 979 1358 8 bezier
+937 1758 904 1671 904 1558 979 1758 8 bezier
+1100 1520 1106 1514 8 line
+1106 1514 1106 1495 8 line
+1106 1495 1094 1483 8 line
+1094 1483 1082 1483 8 line
+1082 1483 1070 1495 8 line
+1070 1495 1070 1514 8 line
+1070 1514 1076 1520 8 line
+1082 1545 1070 1558 8 line
+1070 1558 1106 1558 8 line
+1100 1583 1076 1583 8 line
+1076 1583 1070 1589 8 line
+1070 1589 1070 1614 8 line
+1070 1614 1076 1620 8 line
+1076 1620 1100 1620 8 line
+1100 1620 1106 1614 8 line
+1106 1614 1106 1589 8 line
+1106 1589 1100 1583 8 line
+1106 1583 1070 1620 8 line
+979 858 100 0 0 100 100 100 0 8 quadrant
+979 858 100 0 0 100 100 100 1 8 quadrant
+979 858 100 0 0 100 100 100 2 8 quadrant
+979 858 100 0 0 100 100 100 3 8 quadrant
+904 908 954 908 8 line
+929 933 929 883 8 line
+966 980 960 974 8 line
+960 974 941 974 8 line
+941 974 929 986 8 line
+929 986 929 998 8 line
+929 998 941 1010 8 line
+941 1010 960 1010 8 line
+960 1010 966 1004 8 line
+1016 1010 985 1010 8 line
+985 1010 985 998 8 line
+985 998 1010 998 8 line
+1010 998 1016 992 8 line
+1016 992 1016 980 8 line
+1016 980 1010 974 8 line
+1010 974 991 974 8 line
+991 974 985 980 8 line
+979 3157 100 0 0 100 100 100 0 8 quadrant
+979 3157 100 0 0 100 100 100 1 8 quadrant
+979 3157 100 0 0 100 100 100 2 8 quadrant
+979 3157 100 0 0 100 100 100 3 8 quadrant
+1054 3107 1004 3107 8 line
+1029 3082 1029 3132 8 line
+984 3026 978 3020 8 line
+978 3020 959 3020 8 line
+959 3020 947 3032 8 line
+947 3032 947 3044 8 line
+947 3044 959 3056 8 line
+959 3056 978 3056 8 line
+978 3056 984 3050 8 line
+1009 3044 1022 3056 8 line
+1022 3056 1022 3020 8 line
+729 3157 100 0 0 100 100 100 0 8 quadrant
+729 3157 100 0 0 100 100 100 1 8 quadrant
+729 3157 100 0 0 100 100 100 2 8 quadrant
+729 3157 100 0 0 100 100 100 3 8 quadrant
+804 3107 754 3107 8 line
+779 3082 779 3132 8 line
+735 3026 729 3020 8 line
+729 3020 710 3020 8 line
+710 3020 698 3032 8 line
+698 3032 698 3044 8 line
+698 3044 710 3056 8 line
+710 3056 729 3056 8 line
+729 3056 735 3050 8 line
+754 3050 760 3056 8 line
+760 3056 779 3056 8 line
+779 3056 785 3050 8 line
+785 3050 785 3044 8 line
+785 3044 779 3038 8 line
+779 3038 760 3038 8 line
+760 3038 754 3032 8 line
+754 3032 754 3020 8 line
+754 3020 785 3020 8 line
+529 3166 100 0 0 100 100 100 0 8 quadrant
+529 3166 100 0 0 100 100 100 1 8 quadrant
+529 3166 100 0 0 100 100 100 2 8 quadrant
+529 3166 100 0 0 100 100 100 3 8 quadrant
+579 3241 579 3191 8 line
+604 3216 554 3216 8 line
+661 3172 667 3166 8 line
+667 3166 667 3147 8 line
+667 3147 655 3135 8 line
+655 3135 643 3135 8 line
+643 3135 631 3147 8 line
+631 3147 631 3166 8 line
+631 3166 637 3172 8 line
+637 3191 631 3197 8 line
+631 3197 631 3216 8 line
+631 3216 637 3222 8 line
+637 3222 643 3222 8 line
+643 3222 649 3216 8 line
+649 3216 655 3222 8 line
+655 3222 661 3222 8 line
+661 3222 667 3216 8 line
+667 3216 667 3197 8 line
+667 3197 661 3191 8 line
+649 3203 649 3216 8 line
+1179 2416 100 0 0 100 100 100 0 8 quadrant
+1179 2416 100 0 0 100 100 100 1 8 quadrant
+1179 2416 100 0 0 100 100 100 2 8 quadrant
+1179 2416 100 0 0 100 100 100 3 8 quadrant
+1229 2491 1229 2441 8 line
+1254 2466 1204 2466 8 line
+1310 2422 1316 2416 8 line
+1316 2416 1316 2397 8 line
+1316 2397 1304 2385 8 line
+1304 2385 1292 2385 8 line
+1292 2385 1280 2397 8 line
+1280 2397 1280 2416 8 line
+1280 2416 1286 2422 8 line
+1304 2472 1304 2435 8 line
+1304 2435 1280 2460 8 line
+1280 2460 1316 2460 8 line
+389 1008 100 0 0 100 100 100 0 8 quadrant
+389 1008 100 0 0 100 100 100 1 8 quadrant
+389 1008 100 0 0 100 100 100 2 8 quadrant
+389 1008 100 0 0 100 100 100 3 8 quadrant
+464 958 414 958 8 line
+439 933 439 983 8 line
+394 877 388 871 8 line
+388 871 369 871 8 line
+369 871 357 883 8 line
+357 883 357 895 8 line
+357 895 369 907 8 line
+369 907 388 907 8 line
+388 907 394 901 8 line
+413 907 444 907 8 line
+444 907 444 901 8 line
+444 901 413 871 8 line
+704 54 729 4 6 line
+754 54 729 4 6 line
+430 54 902 54 6 line
+902 54 902 704 6 line
+902 704 430 704 6 line
+430 704 430 54 6 line
+616 731 616 725 8 line
+616 725 622 719 8 line
+622 719 647 719 8 line
+647 719 653 725 8 line
+653 725 653 755 8 line
+672 749 678 755 8 line
+678 755 697 755 8 line
+697 755 703 749 8 line
+703 749 703 743 8 line
+703 743 697 737 8 line
+697 737 678 737 8 line
+678 737 672 731 8 line
+672 731 672 719 8 line
+672 719 703 719 8 line
+129 2732 129 2682 8 line
+104 2482 154 2482 8 line
+154 2482 154 2682 8 line
+154 2682 104 2682 8 line
+104 2682 104 2482 8 line
+129 2482 129 2432 8 line
+206 2532 170 2532 8 line
+170 2532 170 2563 8 line
+170 2563 176 2569 8 line
+176 2569 182 2569 8 line
+182 2569 188 2563 8 line
+188 2563 188 2532 8 line
+188 2563 194 2569 8 line
+194 2569 206 2569 8 line
+176 2588 170 2594 8 line
+170 2594 170 2613 8 line
+170 2613 176 2619 8 line
+176 2619 182 2619 8 line
+182 2619 188 2613 8 line
+188 2613 194 2619 8 line
+194 2619 200 2619 8 line
+200 2619 206 2613 8 line
+206 2613 206 2594 8 line
+206 2594 200 2588 8 line
+188 2600 188 2613 8 line
+189 1078 69 1078 8 line
+69 1138 189 1138 8 line
+129 1078 129 1138 8 line
+69 1168 69 1208 8 line
+69 1188 189 1188 8 line
+189 1168 189 1208 8 line
+189 1238 69 1238 8 line
+69 1238 69 1278 8 line
+69 1278 109 1298 8 line
+109 1298 149 1298 8 line
+149 1298 189 1278 8 line
+189 1278 189 1238 8 line
+69 1408 169 1408 8 line
+169 1408 189 1418 8 line
+189 1418 189 1448 8 line
+189 1448 169 1458 8 line
+109 1398 109 1448 8 line
+129 1478 109 1488 8 line
+109 1488 109 1528 8 line
+109 1528 129 1538 8 line
+129 1538 169 1538 8 line
+169 1538 189 1528 8 line
+189 1528 189 1488 8 line
+189 1488 169 1478 8 line
+169 1478 129 1478 8 line
+189 1638 69 1638 8 line
+69 1638 69 1688 8 line
+69 1688 89 1698 8 line
+89 1698 109 1698 8 line
+109 1698 129 1688 8 line
+129 1688 129 1638 8 line
+129 1688 149 1698 8 line
+149 1698 189 1698 8 line
+169 1718 189 1728 8 line
+189 1728 189 1768 8 line
+189 1768 169 1778 8 line
+169 1778 149 1778 8 line
+149 1778 129 1768 8 line
+129 1768 129 1728 8 line
+129 1728 109 1718 8 line
+109 1718 89 1718 8 line
+89 1718 69 1728 8 line
+69 1728 69 1768 8 line
+69 1768 89 1778 8 line
+89 1808 69 1818 8 line
+69 1818 69 1848 8 line
+69 1848 89 1858 8 line
+89 1858 109 1858 8 line
+109 1858 129 1848 8 line
+129 1848 129 1818 8 line
+129 1818 149 1808 8 line
+149 1808 189 1808 8 line
+189 1808 189 1858 8 line
+89 1888 69 1898 8 line
+69 1898 69 1928 8 line
+69 1928 89 1938 8 line
+89 1938 109 1938 8 line
+109 1938 129 1928 8 line
+129 1928 149 1938 8 line
+149 1938 169 1938 8 line
+169 1938 189 1928 8 line
+189 1928 189 1898 8 line
+189 1898 169 1888 8 line
+129 1908 129 1928 8 line
+89 1968 69 1978 8 line
+69 1978 69 2008 8 line
+69 2008 89 2018 8 line
+89 2018 109 2018 8 line
+109 2018 129 2008 8 line
+129 2008 129 1978 8 line
+129 1978 149 1968 8 line
+149 1968 189 1968 8 line
+189 1968 189 2018 8 line
+docstate restore
+
+%%Trailer
+%%BoundingBox: 0 0 144 325
