@@ -6,7 +6,7 @@ Value=0
 [BUILD_TYPE]
 Value=0
 [ACTIVE_TAB]
-Value=Main.c
+Value=PacketStructure.h
 [USE_EEPROM]
 Value=0
 [USE_HEAP]
@@ -31,8 +31,12 @@ Count=0
 Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
-Count=1
+Count=5
 File0=Main.c
+File1=HardwareProfile.c
+File2=Library\HidToSerial.c
+File3=Library\HidToSerial.h
+File4=PacketStructure.h
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -41,7 +45,7 @@ Count=0
 Count=0
 [SEARCH_PATH]
 Count=5
-Path0=C:\Users\Jonayet New\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\
+Path0=C:\Users\Jonayet New\Documents\Mikroelektronika\mikroC PRO for PIC\defs\
 Path1=C:\Users\Jonayet New\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\
 Path2=E:\Workplace\Projects\Embedded\HidToSerialModule\hid-to-serial-module\v1\FirmwareProject\v1.0\
 Path3=E:\Workplace\Projects\Embedded\HidToSerialModule\hid-to-serial-module\v1\FirmwareProject\v1.0\Library\
