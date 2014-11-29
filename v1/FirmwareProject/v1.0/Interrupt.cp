@@ -14,7 +14,7 @@ void ConfigureInterrupts();
 
 
 
-extern char UART_String[ 900 ];
+extern char UART_String[ 650 ];
 extern unsigned char UART_NewReceived;
 extern unsigned char UART_Timer;
 extern unsigned int UART_Counter;
@@ -33,13 +33,11 @@ void UART_InterruptService();
 void interrupt()
 {
 
- USB_Interrupt_Proc();
+ USBDev_IntHandler();
 }
 
 void interrupt_low()
 {
-
-
  if(TMR0IE_bit == 1 && TMR0IF_bit == 1)
  {
 
@@ -58,6 +56,4 @@ void interrupt_low()
 
   { FSR_Backup = FSR0; FSR0 = &UART_String[UART_Counter]; if(OERR_bit) { CREN_bit = 0; CREN_bit = 1; } while(1) { INDF0 = RCREG; PREINC0 = '\0'; UART_Counter++; UART_Timer = 0x20; while(UART_Timer) { if(RCIF_bit == 1) { break; } UART_Timer--; } if(!UART_Timer) { break; } } FSR0 = FSR_Backup; UART_NewReceived = 0xFF; } ;
  }
-
-
 }

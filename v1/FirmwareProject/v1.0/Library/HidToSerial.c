@@ -2,6 +2,8 @@
 #include "PacketStructure.h"
 #include "UART-HW.h"
 #include "Lib-String.h"
+#include "UsbHelper.h"
+#include <stdint.h>
 
 void WriteSyncOutSegmentToUart();
 unsigned char WaitForUartData(unsigned int Length, unsigned int TimeOut);
@@ -23,54 +25,54 @@ void SetUartBaudrate(unsigned char BaudrateIndex)
     {
         case 1:
           UART1_Init(1200);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 1200");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 1200\r\n");
           break;
         case 2:
           UART1_Init(2400);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 2400");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 2400\r\n");
           break;
         case 4:
           UART1_Init(4800);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 4800");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 4800\r\n");
           break;
         case 9:
           UART1_Init(9600);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 9600");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 9600\r\n");
           break;
         case 14:
           UART1_Init(14400);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 14400");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 14400\r\n");
           break;
         case 19:
           UART1_Init(19200);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 19200");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 19200\r\n");
           break;
         case 38:
           UART1_Init(38400);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 38400");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 38400\r\n");
           break;
         case 56:
           UART1_Init(56000);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 56000");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 56000\r\n");
           break;
         case 57:
           UART1_Init(57600);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 57600");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 57600\r\n");
           break;
         case 115:
           UART1_Init(115200);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 115200");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 115200\r\n");
           break;
         case 128:
           UART1_Init(128000);
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 128000");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 128000\r\n");
           break;
         default:
-          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Error : Unknown BaudRate Index");
+          GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Error : Unknown BaudRate Index\r\n");
           break;
     }
     // send response to the host
-    while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+    HID_WriteBuffer();
 }
 
 void WriteQueryAndGetResponseFromUart()
@@ -115,7 +117,7 @@ void WriteQueryAndGetResponseFromUart()
     }
 
     // finally send response to the host
-    while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+    HID_WriteBuffer();
 }
 
 void WriteSyncOutPacketsToUart()
@@ -132,7 +134,7 @@ void WriteSyncOutPacketsToUart()
             ClearHidWriteBuffer();
             hidWriteBuff.SyncOutAck_FromDevice.TransmisionType = SYNC_OUT_ACK_FROM_DEVICE;
             hidWriteBuff.SyncOutAck_FromDevice.DeviceAckByte = 0;
-            while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+            HID_WriteBuffer();
             return;
         }
 
@@ -176,7 +178,7 @@ _StartAgain:
         {
             hidWriteBuff.SyncInData_FromDevice.TransmisionType = SYNC_IN_DATA_FROM_DEVICE;
             hidWriteBuff.SyncInData_FromDevice.HostAckByte = 0;
-            while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+            HID_WriteBuffer();
             return;
         }
     }
@@ -215,7 +217,7 @@ void SendAsyncInSegmentFromUart(unsigned char FullLength)
     memcpy(hidWriteBuff.AsyncInData_FromDevice.DataArray, UART_String, hidWriteBuff.AsyncInData_FromDevice.ThisSegmentDataLength);
 
     // send response to the host
-    while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+    HID_WriteBuffer();
 }
 
 void SendUnknownResponse()
@@ -226,10 +228,10 @@ void SendUnknownResponse()
     hidWriteBuff.UnknownResponse_FromDevice.TransmisionType = UNKNOWN_FROM_DEVICE;
 
     // set data
-    GetString(hidWriteBuff.UnknownResponse_FromDevice.DataArray, "Unknown!");
+    GetString(hidWriteBuff.UnknownResponse_FromDevice.DataArray, "Unknown!\r\n");
 
     // send response to the host
-    while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+    HID_WriteBuffer();
 }
 
 void SendSyncInFullPacket(unsigned char PacketIndex)
@@ -263,7 +265,7 @@ void SendSyncInFullPacket(unsigned char PacketIndex)
     memcpy(hidWriteBuff.SyncInData_FromDevice.DataArray, (UART_String + dataOffset), hidWriteBuff.SyncInData_FromDevice.ThisSegmentDataLength);
 
     // send response to the host
-    while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+    HID_WriteBuffer();
 }
 
 void SendSyncInFractionalPacket(unsigned char NofOfFullPacket)
@@ -293,7 +295,7 @@ void SendSyncInFractionalPacket(unsigned char NofOfFullPacket)
     memcpy(hidWriteBuff.SyncInData_FromDevice.DataArray, (UART_String + dataOffset), hidWriteBuff.SyncInData_FromDevice.ThisSegmentDataLength);
 
     // send response to the host
-    while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+    HID_WriteBuffer();
 }
 
 void SendSyncInErrorPacket()
@@ -309,7 +311,7 @@ void SendSyncInErrorPacket()
     hidWriteBuff.SyncInData_FromDevice.HostAckByte = 0;
 
     // send response to the host
-    while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+    HID_WriteBuffer();
 }
 
 void WriteSyncOutSegmentToUart()
@@ -328,7 +330,7 @@ void WriteSyncOutSegmentToUart()
     hidWriteBuff.SyncOutAck_FromDevice.TransmisionType = SYNC_OUT_ACK_FROM_DEVICE;
     devAck = hidReadBuff.SyncOutData_FromHost.DeviceAckByte;
     hidWriteBuff.SyncOutAck_FromDevice.DeviceAckByte = devAck;
-    while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+    HID_WriteBuffer();
 }
 
 // Timeout: 0x01
@@ -338,7 +340,7 @@ unsigned char WaitForHidData()
     unsigned int TimeOut;
 
     TimeOut = SYNC_OUT_TIMEOUT;
-    while(!HID_Read())
+    while(!UsbNewPacketReceived)
     {
         TimeOut--;
         if(TimeOut == 0)
@@ -390,7 +392,7 @@ unsigned char CheckSyncInAckFromHost(unsigned char ExpectedAckByte)
 
     // wait host response, timeout SYNC_OUT_TIMEOUT
     TimeOut = SYNC_IN_TIMEOUT;
-    while(!HID_Read())
+    while(!UsbNewPacketReceived)
     {
         TimeOut--;
         if(TimeOut == 0)

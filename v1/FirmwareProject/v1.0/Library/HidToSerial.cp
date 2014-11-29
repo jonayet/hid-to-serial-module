@@ -174,7 +174,7 @@ void SendUnknownResponse();
 
 
 
-extern char UART_String[ 900 ];
+extern char UART_String[ 650 ];
 extern unsigned char UART_NewReceived;
 extern unsigned char UART_Timer;
 extern unsigned int UART_Counter;
@@ -196,7 +196,57 @@ void GetString(char* Destination, const char* ConstString);
  unsigned int  GetStringLength(char* String);
  unsigned int  GetConstStringLength(const char* String);
 unsigned char StrToByte(char* Source, char Length);
-#line 6 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/HidToSerial.c"
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/usbhelper.h"
+#line 1 "c:/users/jonayet new/documents/mikroelektronika/mikroc pro for pic/include/stdint.h"
+
+
+
+
+typedef signed char int8_t;
+typedef signed int int16_t;
+typedef signed long int int32_t;
+
+
+typedef unsigned char uint8_t;
+typedef unsigned int uint16_t;
+typedef unsigned long int uint32_t;
+
+
+typedef signed char int_least8_t;
+typedef signed int int_least16_t;
+typedef signed long int int_least32_t;
+
+
+typedef unsigned char uint_least8_t;
+typedef unsigned int uint_least16_t;
+typedef unsigned long int uint_least32_t;
+
+
+
+typedef signed char int_fast8_t;
+typedef signed int int_fast16_t;
+typedef signed long int int_fast32_t;
+
+
+typedef unsigned char uint_fast8_t;
+typedef unsigned int uint_fast16_t;
+typedef unsigned long int uint_fast32_t;
+
+
+typedef signed int intptr_t;
+typedef unsigned int uintptr_t;
+
+
+typedef signed long int intmax_t;
+typedef unsigned long int uintmax_t;
+#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/hidtoserial.h"
+#line 8 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/usbhelper.h"
+extern uint8_t UsbNewPacketReceived;
+extern uint8_t UsbPacketSentComplete;
+
+uint8_t HID_WriteBuffer();
+#line 1 "c:/users/jonayet new/documents/mikroelektronika/mikroc pro for pic/include/stdint.h"
+#line 8 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/HidToSerial.c"
 void WriteSyncOutSegmentToUart();
 unsigned char WaitForUartData(unsigned int Length, unsigned int TimeOut);
 unsigned char WaitForHidData();
@@ -217,54 +267,54 @@ void SetUartBaudrate(unsigned char BaudrateIndex)
  {
  case 1:
  UART1_Init(1200);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 1200");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 1200\r\n");
  break;
  case 2:
  UART1_Init(2400);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 2400");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 2400\r\n");
  break;
  case 4:
  UART1_Init(4800);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 4800");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 4800\r\n");
  break;
  case 9:
  UART1_Init(9600);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 9600");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 9600\r\n");
  break;
  case 14:
  UART1_Init(14400);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 14400");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 14400\r\n");
  break;
  case 19:
  UART1_Init(19200);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 19200");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 19200\r\n");
  break;
  case 38:
  UART1_Init(38400);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 38400");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 38400\r\n");
  break;
  case 56:
  UART1_Init(56000);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 56000");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 56000\r\n");
  break;
  case 57:
  UART1_Init(57600);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 57600");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 57600\r\n");
  break;
  case 115:
  UART1_Init(115200);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 115200");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 115200\r\n");
  break;
  case 128:
  UART1_Init(128000);
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 128000");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Success : BaudRate 128000\r\n");
  break;
  default:
- GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Error : Unknown BaudRate Index");
+ GetString(hidWriteBuff.BaudRateResponse_FromDevice.DataArray, "Error : Unknown BaudRate Index\r\n");
  break;
  }
 
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
 }
 
 void WriteQueryAndGetResponseFromUart()
@@ -309,7 +359,7 @@ void WriteQueryAndGetResponseFromUart()
  }
 
 
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
 }
 
 void WriteSyncOutPacketsToUart()
@@ -326,7 +376,7 @@ void WriteSyncOutPacketsToUart()
  ClearHidWriteBuffer();
  hidWriteBuff.SyncOutAck_FromDevice.TransmisionType = SYNC_OUT_ACK_FROM_DEVICE;
  hidWriteBuff.SyncOutAck_FromDevice.DeviceAckByte = 0;
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
  return;
  }
 
@@ -370,7 +420,7 @@ _StartAgain:
  {
  hidWriteBuff.SyncInData_FromDevice.TransmisionType = SYNC_IN_DATA_FROM_DEVICE;
  hidWriteBuff.SyncInData_FromDevice.HostAckByte = 0;
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
  return;
  }
  }
@@ -409,7 +459,7 @@ void SendAsyncInSegmentFromUart(unsigned char FullLength)
  memcpy(hidWriteBuff.AsyncInData_FromDevice.DataArray, UART_String, hidWriteBuff.AsyncInData_FromDevice.ThisSegmentDataLength);
 
 
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
 }
 
 void SendUnknownResponse()
@@ -420,10 +470,10 @@ void SendUnknownResponse()
  hidWriteBuff.UnknownResponse_FromDevice.TransmisionType = UNKNOWN_FROM_DEVICE;
 
 
- GetString(hidWriteBuff.UnknownResponse_FromDevice.DataArray, "Unknown!");
+ GetString(hidWriteBuff.UnknownResponse_FromDevice.DataArray, "Unknown!\r\n");
 
 
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
 }
 
 void SendSyncInFullPacket(unsigned char PacketIndex)
@@ -457,7 +507,7 @@ void SendSyncInFullPacket(unsigned char PacketIndex)
  memcpy(hidWriteBuff.SyncInData_FromDevice.DataArray, (UART_String + dataOffset), hidWriteBuff.SyncInData_FromDevice.ThisSegmentDataLength);
 
 
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
 }
 
 void SendSyncInFractionalPacket(unsigned char NofOfFullPacket)
@@ -487,7 +537,7 @@ void SendSyncInFractionalPacket(unsigned char NofOfFullPacket)
  memcpy(hidWriteBuff.SyncInData_FromDevice.DataArray, (UART_String + dataOffset), hidWriteBuff.SyncInData_FromDevice.ThisSegmentDataLength);
 
 
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
 }
 
 void SendSyncInErrorPacket()
@@ -503,7 +553,7 @@ void SendSyncInErrorPacket()
  hidWriteBuff.SyncInData_FromDevice.HostAckByte = 0;
 
 
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
 }
 
 void WriteSyncOutSegmentToUart()
@@ -522,7 +572,7 @@ void WriteSyncOutSegmentToUart()
  hidWriteBuff.SyncOutAck_FromDevice.TransmisionType = SYNC_OUT_ACK_FROM_DEVICE;
  devAck = hidReadBuff.SyncOutData_FromHost.DeviceAckByte;
  hidWriteBuff.SyncOutAck_FromDevice.DeviceAckByte = devAck;
- while(!HID_Write(&hidWriteBuff.Raw.bytes, 64)) { }
+ HID_WriteBuffer();
 }
 
 
@@ -532,7 +582,7 @@ unsigned char WaitForHidData()
  unsigned int TimeOut;
 
  TimeOut =  5000 ;
- while(!HID_Read())
+ while(!UsbNewPacketReceived)
  {
  TimeOut--;
  if(TimeOut == 0)
@@ -584,7 +634,7 @@ unsigned char CheckSyncInAckFromHost(unsigned char ExpectedAckByte)
 
 
  TimeOut =  5000 ;
- while(!HID_Read())
+ while(!UsbNewPacketReceived)
  {
  TimeOut--;
  if(TimeOut == 0)

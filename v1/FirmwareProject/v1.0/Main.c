@@ -34,10 +34,12 @@
 #include "PacketStructure.h"
 #include "Library/UART-HW.h"
 #include "Library/HidToSerial.h"
+#include "UsbHelper.h"
 
 // Buffers should be in USB RAM, please consult datasheet
 HostPacketData hidReadBuff absolute 0x500;
 DevicePacketData hidWriteBuff absolute 0x540;
+
 
 // timer, will increament in interrupt routine
 unsigned int Timer_1ms = 0;
@@ -57,9 +59,22 @@ void main()
     
     UART1_Init(9600);
     
-    // Enable HID communication
-    HID_Enable(&hidReadBuff.Raw.bytes, &hidWriteBuff.Raw.bytes);
+    // Initialize HID Class
+    USBDev_HIDInit();
+
+    // Initialize USB device module
+    USBDev_Init();
+
+    // Enable USB device interrupt
+    IPEN_bit = 1;
+    USBIP_bit = 1;
+    USBIE_bit = 1;
+    GIEH_bit = 1;
     
+    // Wait until device is configured (enumeration is successfully finished)
+    while(USBDev_GetDeviceState() != _USB_DEV_STATE_CONFIGURED) { }
+    
+    /*
     while(1)
     {
         _OP_DEBUG_SIG = 1;
@@ -67,12 +82,13 @@ void main()
         _OP_DEBUG_SIG = 0;
         Delay_us(100);
     }
+    */
     
     // forever loop to continue
     while(1)
     {
         // wait to a hid data packet found
-        if(HID_Read())
+        if(UsbNewPacketReceived)
         {
             if(hidReadBuff.TransmisionType == BAUDRATE_CMD_FROM_HOST)
             {
@@ -140,6 +156,7 @@ void main()
                 hidReadBuff.TransmisionType = NONE_FROM_HOST;
                 DoBackgroundWork = 0;
             }
+            UsbNewPacketReceived = 0;
         }
         
         // post task for SYNC_IN_START_FROM_HOST

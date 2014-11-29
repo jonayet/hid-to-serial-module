@@ -5,7 +5,7 @@
 
 
 
-extern char UART_String[ 900 ];
+extern char UART_String[ 650 ];
 extern unsigned char UART_NewReceived;
 extern unsigned char UART_Timer;
 extern unsigned int UART_Counter;
@@ -21,7 +21,7 @@ void UART_StartReading();
 void UART_StopReading();
 void UART_InterruptService();
 #line 8 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/UART-HW.c"
-char UART_String[ 900 ];
+char UART_String[ 650 ];
 unsigned char UART_NewReceived;
 unsigned char UART_Tmp;
 unsigned char UART_Timer;
