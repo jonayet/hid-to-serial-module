@@ -92,28 +92,32 @@ void WriteQueryAndGetResponseFromUart()
         UART_WriteByte(hidReadBuff.SingleQuery_FromHost.DataArray[i]);
     }
 
-    // if Timeout_x10 is zero, this means
-    // no response to read
-    if(hidReadBuff.SingleQuery_FromHost.Timeout == 0) { return; }
-
     // try to read 'BufferBeforeSend' length data from the UART bus within the 'TimeOut' ms time
-    result = WaitForUartData(hidReadBuff.SingleQuery_FromHost.ExpectedDataLength, hidReadBuff.SingleQuery_FromHost.Timeout);
-    UART_StopReading();
+    result = 0;
+    if(hidReadBuff.SingleQuery_FromHost.Timeout > 0)
+    {
+        result = WaitForUartData(hidReadBuff.SingleQuery_FromHost.ExpectedDataLength, hidReadBuff.SingleQuery_FromHost.Timeout);
+        UART_StopReading();
+    }
 
     ClearHidWriteBuffer();
     // build response
     hidWriteBuff.SingleResponse_FromDevice.TransmisionType = SINGLE_RESPONSE_FROM_DEVICE;
-    if(result == 0)
+    if(result == 0x02)
     {
         hidWriteBuff.SingleResponse_FromDevice.ThisSegmentDataLength = hidReadBuff.SingleQuery_FromHost.ExpectedDataLength;
         memcpy(hidWriteBuff.SingleResponse_FromDevice.DataArray, UART_String, hidWriteBuff.SingleResponse_FromDevice.ThisSegmentDataLength);
     }
-    else
+    else if(result == 0x01)
     {
         // Timeout but not expected uart data found
         // so, return with SegmentLength = UART_Counter. (SegmentLength = 0 means error flag)
         hidWriteBuff.SingleResponse_FromDevice.ThisSegmentDataLength = UART_Counter;
         memcpy(hidWriteBuff.SingleResponse_FromDevice.DataArray, UART_String, UART_Counter);
+    }
+    else
+    {
+        hidWriteBuff.SingleResponse_FromDevice.ThisSegmentDataLength = 0;
     }
 
     // finally send response to the host
@@ -353,33 +357,40 @@ unsigned char WaitForHidData()
     return 0;
 }
 
-// Timeout: 0x01
-// Incorrect Correct Length: 0x02
-// Correct Length: 0x00
-unsigned char WaitForUartData(unsigned int Length, unsigned int TimeOut)
+// Timeout without any data: 0
+// Timeout with data received: 0x01
+// Data of Expected Length found: 0x02
+unsigned char WaitForUartData(unsigned int ExpectedLength, unsigned int TimeOut)
 {
     unsigned int i;
-
-    for(i = 0; i < TimeOut; i++)
+    if(TimeOut == 0) { return 0; }
+    if(ExpectedLength != 0)
     {
-        if(Length > 0)
+        for(i = 0; i < TimeOut; i++)
         {
-            if(UART_Counter >= Length)
+            if(UART_Counter >= ExpectedLength)
             {
-                return 0;
+                return 2;
             }
+            Delay_1ms();
         }
-        Delay_1ms();
+    }
+    else
+    {
+        for(i = 0; i < TimeOut; i++)
+        {
+            Delay_1ms();
+        }
     }
 
     // incorrect length
     if(UART_Counter > 0)
     {
-        return 0x02;
+        return 1;
     }
 
     // timeout
-    return 0x01;
+    return 0;
 }
 
 // Timeout: 0x01

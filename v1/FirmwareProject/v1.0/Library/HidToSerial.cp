@@ -335,27 +335,31 @@ void WriteQueryAndGetResponseFromUart()
  }
 
 
-
- if(hidReadBuff.SingleQuery_FromHost.Timeout == 0) { return; }
-
-
+ result = 0;
+ if(hidReadBuff.SingleQuery_FromHost.Timeout > 0)
+ {
  result = WaitForUartData(hidReadBuff.SingleQuery_FromHost.ExpectedDataLength, hidReadBuff.SingleQuery_FromHost.Timeout);
  UART_StopReading();
+ }
 
  ClearHidWriteBuffer();
 
  hidWriteBuff.SingleResponse_FromDevice.TransmisionType = SINGLE_RESPONSE_FROM_DEVICE;
- if(result == 0)
+ if(result == 0x02)
  {
  hidWriteBuff.SingleResponse_FromDevice.ThisSegmentDataLength = hidReadBuff.SingleQuery_FromHost.ExpectedDataLength;
  memcpy(hidWriteBuff.SingleResponse_FromDevice.DataArray, UART_String, hidWriteBuff.SingleResponse_FromDevice.ThisSegmentDataLength);
  }
- else
+ else if(result == 0x01)
  {
 
 
  hidWriteBuff.SingleResponse_FromDevice.ThisSegmentDataLength = UART_Counter;
  memcpy(hidWriteBuff.SingleResponse_FromDevice.DataArray, UART_String, UART_Counter);
+ }
+ else
+ {
+ hidWriteBuff.SingleResponse_FromDevice.ThisSegmentDataLength = 0;
  }
 
 
@@ -598,30 +602,37 @@ unsigned char WaitForHidData()
 
 
 
-unsigned char WaitForUartData(unsigned int Length, unsigned int TimeOut)
+unsigned char WaitForUartData(unsigned int ExpectedLength, unsigned int TimeOut)
 {
  unsigned int i;
-
+ if(TimeOut == 0) { return 0; }
+ if(ExpectedLength != 0)
+ {
  for(i = 0; i < TimeOut; i++)
  {
- if(Length > 0)
+ if(UART_Counter >= ExpectedLength)
  {
- if(UART_Counter >= Length)
- {
- return 0;
- }
+ return 2;
  }
  Delay_1ms();
+ }
+ }
+ else
+ {
+ for(i = 0; i < TimeOut; i++)
+ {
+ Delay_1ms();
+ }
  }
 
 
  if(UART_Counter > 0)
  {
- return 0x02;
+ return 1;
  }
 
 
- return 0x01;
+ return 0;
 }
 
 
