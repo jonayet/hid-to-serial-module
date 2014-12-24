@@ -43,7 +43,7 @@ typedef signed long int intmax_t;
 typedef unsigned long int uintmax_t;
 #line 10 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Library/HID_Descriptor.c"
 const uint8_t _USB_HID_MANUFACTURER_STRING[] = "INFRA Tech";
-const uint8_t _USB_HID_PRODUCT_STRING[] = "HID to Serial Module";
+const uint8_t _USB_HID_PRODUCT_STRING[] = "HID to Serial Module (F)";
 const uint8_t _USB_HID_SERIALNUMBER_STRING[] = "ITHSM010001";
 const uint8_t _USB_HID_CONFIGURATION_STRING[] = "";
 const uint8_t _USB_HID_INTERFACE_STRING[] = "";
@@ -52,7 +52,7 @@ const uint8_t _USB_HID_INTERFACE_STRING[] = "";
 const uint8_t _USB_VENDOR_ID0 = 0x1F;
 const uint8_t _USB_VENDOR_ID1 = 0xBD;
 const uint8_t _USB_PRODUCT_ID0 = 0x00;
-const uint8_t _USB_PRODUCT_ID1 = 0x05;
+const uint8_t _USB_PRODUCT_ID1 = 0x0F;
 const uint8_t _USB_SERVICE_INTERVAL = 1;
 
 
