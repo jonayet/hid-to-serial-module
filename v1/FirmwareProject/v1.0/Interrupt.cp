@@ -1,6 +1,6 @@
 #line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Interrupt.c"
 #line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
-#line 17 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
+#line 15 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
 extern unsigned int Timer_1ms;
 
 
@@ -14,7 +14,7 @@ void ConfigureInterrupts();
 
 
 
-extern char UART_String[ 650 ];
+extern char UART_String[ 945 ];
 extern unsigned char UART_NewReceived;
 extern unsigned char UART_Timer;
 extern unsigned int UART_Counter;
@@ -33,11 +33,13 @@ void UART_InterruptService();
 void interrupt()
 {
 
- USBDev_IntHandler();
+ USB_Interrupt_Proc();
 }
 
 void interrupt_low()
 {
+
+
  if(TMR0IE_bit == 1 && TMR0IF_bit == 1)
  {
 
@@ -56,4 +58,6 @@ void interrupt_low()
 
   { FSR_Backup = FSR0; FSR0 = &UART_String[UART_Counter]; if(OERR_bit) { CREN_bit = 0; CREN_bit = 1; } while(1) { INDF0 = RCREG; PREINC0 = '\0'; UART_Counter++; UART_Timer = 0x20; while(UART_Timer) { if(RCIF_bit == 1) { break; } UART_Timer--; } if(!UART_Timer) { break; } } FSR0 = FSR_Backup; UART_NewReceived = 0xFF; } ;
  }
+
+
 }

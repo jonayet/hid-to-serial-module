@@ -1,6 +1,6 @@
 #line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/HardwareProfile.c"
 #line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
-#line 17 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
+#line 15 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
 extern unsigned int Timer_1ms;
 
 
@@ -19,10 +19,6 @@ void ConfigureIO()
 
   LATC2_bit  = 0;
   TRISC2_bit  = 0;
-
-
-  LATA0_bit  = 0;
-  TRISA0_bit  = 0;
 }
 
 

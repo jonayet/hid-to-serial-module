@@ -6,12 +6,14 @@
 // Interrupt service routine
 void interrupt()
 {
-    // Call library interrupt handler routine
-    USBDev_IntHandler();
+   // USB servicing is done inside the interrupt
+    USB_Interrupt_Proc();
 }
 
 void interrupt_low()
 {
+    //OS_EnterInt();
+
     if(TMR0IE_bit == 1 && TMR0IF_bit == 1)
     {
         // reset TMR0 for 1 ms
@@ -30,4 +32,6 @@ void interrupt_low()
         // will clear RCIF_bit flag
         UART_InterruptService();
     }
+
+    //OS_LeaveInt();
 }

@@ -1,7 +1,7 @@
 #line 1 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Main.c"
-#line 1 "c:/users/jonayet new/documents/mikroelektronika/mikroc pro for pic/include/built_in.h"
+#line 1 "c:/users/jonayet/documents/mikroelektronika/mikroc pro for pic/include/built_in.h"
 #line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
-#line 17 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
+#line 15 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/hardwareprofile.h"
 extern unsigned int Timer_1ms;
 
 
@@ -165,7 +165,7 @@ typedef enum
 
 
 
-extern char UART_String[ 650 ];
+extern char UART_String[ 945 ];
 extern unsigned char UART_NewReceived;
 extern unsigned char UART_Timer;
 extern unsigned int UART_Counter;
@@ -199,59 +199,9 @@ void SendSyncInPacketsFromUart();
 void WriteAsyncOutDataToUart();
 void SendAsyncInSegmentFromUart(unsigned char FullLength);
 void SendUnknownResponse();
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/usbhelper.h"
-#line 1 "c:/users/jonayet new/documents/mikroelektronika/mikroc pro for pic/include/stdint.h"
-
-
-
-
-typedef signed char int8_t;
-typedef signed int int16_t;
-typedef signed long int int32_t;
-
-
-typedef unsigned char uint8_t;
-typedef unsigned int uint16_t;
-typedef unsigned long int uint32_t;
-
-
-typedef signed char int_least8_t;
-typedef signed int int_least16_t;
-typedef signed long int int_least32_t;
-
-
-typedef unsigned char uint_least8_t;
-typedef unsigned int uint_least16_t;
-typedef unsigned long int uint_least32_t;
-
-
-
-typedef signed char int_fast8_t;
-typedef signed int int_fast16_t;
-typedef signed long int int_fast32_t;
-
-
-typedef unsigned char uint_fast8_t;
-typedef unsigned int uint_fast16_t;
-typedef unsigned long int uint_fast32_t;
-
-
-typedef signed int intptr_t;
-typedef unsigned int uintptr_t;
-
-
-typedef signed long int intmax_t;
-typedef unsigned long int uintmax_t;
-#line 1 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/hidtoserial.h"
-#line 8 "e:/workplace/projects/embedded/hidtoserialmodule/hid-to-serial-module/v1/firmwareproject/v1.0/library/usbhelper.h"
-extern uint8_t UsbNewPacketReceived;
-extern uint8_t UsbPacketSentComplete;
-
-uint8_t HID_WriteBuffer();
-#line 40 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Main.c"
+#line 39 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Main.c"
 HostPacketData hidReadBuff absolute 0x500;
 DevicePacketData hidWriteBuff absolute 0x540;
-
 
 
 unsigned int Timer_1ms = 0;
@@ -272,24 +222,13 @@ void main()
  UART1_Init(9600);
 
 
- USBDev_HIDInit();
+ HID_Enable(&hidReadBuff.Raw.bytes, &hidWriteBuff.Raw.bytes);
 
 
- USBDev_Init();
-
-
- IPEN_bit = 1;
- USBIP_bit = 1;
- USBIE_bit = 1;
- GIEH_bit = 1;
-
-
- while(USBDev_GetDeviceState() != _USB_DEV_STATE_CONFIGURED) { }
-#line 88 "E:/Workplace/Projects/Embedded/HidToSerialModule/hid-to-serial-module/v1/FirmwareProject/v1.0/Main.c"
  while(1)
  {
 
- if(UsbNewPacketReceived)
+ if(HID_Read())
  {
  if(hidReadBuff.TransmisionType == BAUDRATE_CMD_FROM_HOST)
  {
@@ -357,7 +296,6 @@ void main()
  hidReadBuff.TransmisionType = NONE_FROM_HOST;
  DoBackgroundWork = 0;
  }
- UsbNewPacketReceived = 0;
  }
 
 
